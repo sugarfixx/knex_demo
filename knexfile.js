@@ -2,7 +2,7 @@
 module.exports = {
     development: {
         client: 'pg',
-        connection: 'postgress://localhost/knex_test',
+        connection: 'postgres://postgres/mydb',
         migrations : {
             directory: __dirname + '/db/migrations',
         },

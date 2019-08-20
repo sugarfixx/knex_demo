@@ -5,8 +5,8 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('authors').insert([
-        {id: 1, name: 'Sir Winston Churchill'},
-        {id: 2, name: 'Muhammad Ali'},
+        {id: 1, name: "Sir Winston Churchill"},
+        {id: 2, name: "Muhammad Ali"}
       ]);
     });
 };

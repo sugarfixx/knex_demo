@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  postgres:
+    environment:
+    - POSTGRES_DB=mydb
+    - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+    - "5432:5432"
+    image: postgres:9.6
+    restart: always
+    volumes:
+    - ".:/data"
+
+  migrations:
+    build: .
+    ports:
+      - "80:8080"
+    depends_on:
+    - postgres
+    command: sh -c 'while !postgres:5432; do sleep 1; done; npm run init'
+    environment:
+    - DOCKER=true
+    - NODE_ENV=development
+    - PGHOST=postgres
+    - PGPORT=5432
+    - PGUSER=postgres
+    - PGPASSWORD=postgres
+    - PGDATABASE=mydb
+    volumes:
+    - "./db:/db"
