@@ -23,7 +23,7 @@ services:
       - "80:8080"
     depends_on:
     - postgres
-    command: sh -c 'while !postgres:5432; do sleep 1; done; npm run init'
+    command: "npm run init"
     environment:
     - DOCKER=true
     - NODE_ENV=development
